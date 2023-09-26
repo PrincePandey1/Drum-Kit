@@ -1,0 +1,89 @@
+
+var numberOfDrumButtons = document.querySelectorAll(".drum").length;
+
+//Using click event Listener  
+for(var i=0 ; i < numberOfDrumButtons; i++){
+    document.querySelectorAll(".drum")[i].addEventListener("click",function(){
+
+        var buttonInnerHTMl = this.innerHTML; // This provide current element which pressed, we are accessing the inner HTML of current element.
+
+        makeSound(buttonInnerHTMl);
+
+        buttonAnimation(buttonInnerHTMl);
+
+    });
+          
+}
+
+//Detecting Keyboard Press
+document.addEventListener("keypress", function(event){
+
+      makeSound(event.key);
+
+      buttonAnimation(event.key); // passing current key to the animation fucntion
+
+});
+
+
+
+
+
+function makeSound(key){
+    switch (key) {
+        case 'w':
+            var audio = new Audio('./sounds/tom-1.mp3');
+            audio.play();
+            break;
+
+        case 'a':
+            var audio = new Audio('./sounds/tom-2.mp3');
+            audio.play();
+            break;
+
+
+         case 's':
+            var audio = new Audio('./sounds/tom-3.mp3');
+            audio.play();
+            break;
+
+        case 'd':
+            var audio = new Audio('./sounds/tom-4.mp3');
+            audio.play();
+            break;
+
+        case 'j':
+            var audio = new Audio('./sounds/snare.mp3');
+            audio.play();
+            break;
+
+
+        case 'k':
+            var audio = new Audio('./sounds/kick-bass.mp3');
+            audio.play();
+            break;
+
+
+        case 'l':
+            var audio = new Audio('./sounds/crash.mp3');
+            audio.play();
+            break;
+
+
+        default:
+            break;
+       }
+}
+
+//Add animation to the pressed button
+function buttonAnimation(currentKey){
+    var activeButton = document.querySelector("."+currentKey);
+    activeButton.classList.add('pressed');
+
+    //After 0.1 ms it remove the animation from the pressed button.
+    setTimeout(() => {
+        activeButton.classList.remove('pressed'); 
+    }, 100);
+}
+
+
+
